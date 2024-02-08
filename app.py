@@ -14,7 +14,7 @@ def save_query_to_file(query):
     date = datetime.now().strftime('%x %X')
     data = {'city': query, 'date': []}
 
-    file_path = './app_weather/data.json'
+    file_path = './data.json'
 
     # Trying to get data from file
     try:
@@ -68,7 +68,7 @@ def weather():
 
 @app.route('/history')
 def json_data():
-    file_path = './app_weather/data.json'
+    file_path = './data.json'
     IS_DATA_EXIST = False
     try:
         with open(file_path, 'r') as file:
