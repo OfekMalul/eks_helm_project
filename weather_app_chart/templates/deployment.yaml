@@ -19,6 +19,6 @@ spec:
             - containerPort: {{ .Values.service.port }}
           envFrom:
             - configMapRef:
-              name: {{ .Values.configmap.name }}
+                name: {{ .Values.configmap.name }}
       imagePullSecrets:
         - name: web-app-key
