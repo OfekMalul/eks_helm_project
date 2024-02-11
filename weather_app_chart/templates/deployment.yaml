@@ -17,5 +17,8 @@ spec:
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           ports:
             - containerPort: {{ .Values.service.port }}
+          envFrom:
+          - configMapRef:
+            name: {{ .Values.configMap.name }}
       imagePullSecrets:
         - name: web-app-key

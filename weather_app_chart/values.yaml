@@ -7,13 +7,17 @@ replicaCount: 4
 image:
   repository: ofekmalul/weather_app_advanced
   pullPolicy: IfNotPresent
-  tag: "1.0.0"
+  tag: "1.0.1"
 
 myLabel: 'web-app'
 
 imagePullSecrets: ["web-app-key"]
 nameOverride: ""
 fullnameOverride: ""
+
+configmap:
+  name: "blue-configmap"
+  color: "blue"
 
 # serviceAccount:
 #   # Specifies whether a service account should be created
