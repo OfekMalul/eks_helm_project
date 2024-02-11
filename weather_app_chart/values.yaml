@@ -11,7 +11,7 @@ image:
 
 myLabel: 'web-app'
 
-imagePullSecrets: []
+imagePullSecrets: ["web-app-key"]
 nameOverride: ""
 fullnameOverride: ""
 
