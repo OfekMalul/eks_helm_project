@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.9.6-slim-bullseye
 
 WORKDIR /app
 
@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 9090
 
-CMD ["python","app.py"]
+ENV BACKGROUND_COLOR=blue
+
+CMD python app.py
