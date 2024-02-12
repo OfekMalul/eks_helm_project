@@ -2,3 +2,5 @@
 ./tests/*
 ./scripts/*
 ./venv/*
+./aws_eks/eks/.terraform/*
+./aws_eks/eks/.terraform.lock.hcl
