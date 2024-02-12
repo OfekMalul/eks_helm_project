@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: ofek-cluster
+  region: us-east-1
+
+nodeGroups:
+  - name: worker-nodes
+    instanceType: t3.medium
+    desiredCapacity: 2
+    # availabilityZones: ["us-east-1a", "us-east-1b", "us-east-1c"]
+    tags:
+      "managedBy": "eksctl"
+      "environment": "test"
+    # vpc: 
+    #   id: "vpc-02f723194103db9cb"
+    # subnets:
+    #   -  "subnet-0917db72fa1069c7f"
+    #   -  "subnet-01dfa7a6274321778"
+    #   -  "subnet-04373b7c2f42ddfc7"
+
+
+
