@@ -19,16 +19,9 @@ configmap:
   name: "blue-configmap"
   color: "blue"
 
-# serviceAccount:
-#   # Specifies whether a service account should be created
-#   create: true
-#   # Automatically mount a ServiceAccount's API credentials?
-#   automount: true
-#   # Annotations to add to the service account
-#   annotations: {}
-#   # The name of the service account to use.
-#   # If not set and create is true, a name is generated using the fullname template
-#   name: ""
+configmapGreen:
+  name: "green-configmap"
+  color: "green"
 
 podAnnotations: {}
 podLabels: {}
@@ -48,23 +41,14 @@ service:
   name: web-app-service
   type: ClusterIP
   port: 80
+  targetPort: 9090
 
 ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
+  enabled: true
+  host: aa26cb8f6a03145128af08ca3b82a6b3-1075584987.us-east-1.elb.amazonaws.com
+  path: /
+  pathType: Prefix # means that the path in the http request must start with /
+  
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
