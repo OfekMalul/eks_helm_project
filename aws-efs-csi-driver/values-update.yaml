@@ -1,0 +1,14 @@
+
+storageClasses:
+- name: efs-sc
+  annotations:
+    # Use that annotation if you want this to your default storageclass
+    storageclass.kubernetes.io/is-default-class: "true"
+  mountOptions:
+  - tls
+  parameters:
+    provisioningMode: efs-ap
+    fileSystemId: fs-06e514f6da20e6094
+    directoryPerms: "700"
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate
