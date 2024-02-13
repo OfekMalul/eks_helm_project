@@ -1,0 +1,73 @@
+I did a test on k8s cluster.
+I needed to create an ec2 that will communicate with the k8s cluster on a private ip address.
+
+To do so:
+1. Create ec2
+2. Install kubectl
+3. Create a folder .kube
+4. Create a file in the .kube dir named "config"
+5. Copy the kube.config form the cluster controller into the the ec2 config file
+6. test - kubectl get nodes
+
+
+####### In order to pull images from the private repo ######
+1.
+kubectl create secret docker-registry myregistrykey \
+  --docker-server=<your-registry-server> \
+  --docker-username=<your-username> \
+  --docker-password=<your-password> \
+  --docker-email=<your-email>
+  kubectl create secret docker-registry web-app-key \
+  --docker-server=https://index.docker.io/v1/ \
+  --docker-username=ofekmalul \
+  --docker-password=Ofek93299329
+Replace <your-registry-server>, <your-username>, <your-password>, and <your-email> with your actual Docker registry server URL, username, password, and email address.
+
+-- it will create a secret that will be saved in etcd in base64 so dont worry
+*** KEY NAME = web-app-key TO PULL THE IMAGE***
+
+
+
+############## EKS CTL SETUP #################
+1. Make sure you have installed aws-cli, kubectl, eksctl
+2. Create IAM policies + user to enable eks to create the clutser. They are made and named with an ending of "ofek"
+    2.b Also attach EC2FULLACCESS + AWSCLOUDFORMATIONFULLACCESS
+3. Create a config file to create the eks cluster 
+    In this project it is under eks_cluster
+    eksctl create cluster <name> -f config.file
+
+############## DOCKER IMAGE BUILD ON MAC !!!! #############
+
+when you build an image use the flag: 
+--platform linux/amd64
+docker buildx build -t weather_app:1.0.7 . --platform linux/amd64  
+
+
+############## ingress Controller #################
+
+1. utilize ingress controller from helm repository
+2. Install the ingress controller
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm repo list
+    helm install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx
+3. update the values in the according to the aws dns provided by the loadbalancer.
+4. upgrade the chart
+
+
+
+############# PVC PV AND Storage class EFS ###########
+1. Crearte EFS in AWS
+    Please edit the security group! its fine for now to enable all traffic in the vpc
+2. Install EFS CSI Driver using helm chart
+     helm repo add efs-csi https://github.com/kubernetes-sigs/aws-efs-csi-driver
+     helm upgrade --install aws-efs-csi-driver --namespace kube-system aws-efs-csi-driver/aws-efs-csi-driver
+4. Add what is needed to the deployment so the pods can access the volume
+5. upgrade the chart and you should be gloden
+
+############  DELETE THE CLUSTER EKS  ############
+
+1. aws eks list-clusters
+2. kubectl get nodes
+3. kubectl cordon <node ip>
+   kubectl drain <node ip> --ignore-daemonsets --delete-emptydir-data
+. eksctl delete cluster --name <name>
