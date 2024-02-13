@@ -68,7 +68,7 @@ def weather():
 
 @app.route('/history')
 def json_data():
-    file_path = './data.json'
+    file_path = '/tmp/data.json'
     IS_DATA_EXIST = False
     try:
         with open(file_path, 'r') as file:
