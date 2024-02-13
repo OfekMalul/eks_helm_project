@@ -3,7 +3,7 @@ replicaCount: 4
 image:
   repository: ofekmalul/weather_app_advanced
   pullPolicy: IfNotPresent
-  tag: "1.0.7"
+  tag: "1.0.8"
 
 myLabel: 'web-app'
 
