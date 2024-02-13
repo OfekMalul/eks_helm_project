@@ -15,10 +15,17 @@ spec:
       containers:
         - name: {{ .Values.myLabel }}
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          volumeMounts:
+          - name: {{ .Values.volumeMounts.name}}
+            mountPath: {{ .Values.volumeMounts.mountPath }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
           envFrom:
             - configMapRef:
                 name: {{ .Values.configmap.name }}
       imagePullSecrets:
-        - name: web-app-key
+        - name: {{ .Values.imagePullSecrets[0] }}
+      volumes:
+        - name: {{ .Values.volumes.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistent.name}}

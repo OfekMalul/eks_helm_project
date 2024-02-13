@@ -1,7 +1,3 @@
-# Default values for weather_app_chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 4
 
 image:
@@ -23,20 +19,6 @@ configmapGreen:
   name: "green-configmap"
   color: "green"
 
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
 service:
   name: web-app-service
   type: ClusterIP
@@ -45,44 +27,22 @@ service:
 
 ingress:
   enabled: true
-  host: aa26cb8f6a03145128af08ca3b82a6b3-1075584987.us-east-1.elb.amazonaws.com
+  host: a38e955fecd724ed9994f3a929fb1ca9-2049781111.us-east-1.elb.amazonaws.com
   path: /
   pathType: Prefix # means that the path in the http request must start with /
-  
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 4
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+# persistennt data for pods
+persistent:
+  name: "efs-claim"
+  namespace: "assets"
+  storageClassName: "efs-sc"
+  accessMode: ReadWriteMany
+  size: 1Gi
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+# volumeMount for containers
+volumeMounts:
+  name: "efsvolume"
+  mountPath: "/app/data.json"
 
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+Voulme:
+  name: "efsvolume"
