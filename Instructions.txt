@@ -17,10 +17,6 @@ kubectl create secret docker-registry myregistrykey \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
   --docker-email=<your-email>
-  kubectl create secret docker-registry web-app-key \
-  --docker-server=https://index.docker.io/v1/ \
-  --docker-username=ofekmalul \
-  --docker-password=Ofek93299329
 Replace <your-registry-server>, <your-username>, <your-password>, and <your-email> with your actual Docker registry server URL, username, password, and email address.
 
 -- it will create a secret that will be saved in etcd in base64 so dont worry
