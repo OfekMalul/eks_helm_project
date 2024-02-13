@@ -5,3 +5,5 @@ venv
 tests
 .git
 data.json
+eks_cluster
+weather_app_chart
