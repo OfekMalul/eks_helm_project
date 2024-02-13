@@ -14,7 +14,7 @@ def save_query_to_file(query):
     date = datetime.now().strftime('%x %X')
     data = {'city': query, 'date': []}
 
-    file_path = './data.json'
+    file_path = '/tmp/data.json'
 
     # Trying to get data from file
     try:
