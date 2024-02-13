@@ -57,6 +57,9 @@ docker buildx build -t weather_app:1.0.7 . --platform linux/amd64
 2. Install EFS CSI Driver using helm chart
      helm repo add efs-csi https://github.com/kubernetes-sigs/aws-efs-csi-driver
      helm upgrade --install aws-efs-csi-driver --namespace kube-system aws-efs-csi-driver/aws-efs-csi-driver
+     helm pull aws-efs-csi-driver/aws-efs-csi-driver
+
+    2.1 create values-update.yaml file and update the storageclass according to your need
 4. Add what is needed to the deployment so the pods can access the volume
 5. upgrade the chart and you should be gloden
 
