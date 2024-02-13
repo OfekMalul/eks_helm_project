@@ -7,7 +7,8 @@ image:
 
 myLabel: 'web-app'
 
-imagePullSecrets: ["web-app-key"]
+imagePullSecrets:
+  - "web-app-key"
 nameOverride: ""
 fullnameOverride: ""
 
@@ -36,13 +37,13 @@ persistent:
   name: "efs-claim"
   namespace: "assets"
   storageClassName: "efs-sc"
-  accessMode: ReadWriteMany
-  size: 1Gi
+  accessMode: "ReadWriteMany"
+  size: "100Ki"
 
 # volumeMount for containers
 volumeMounts:
   name: "efsvolume"
   mountPath: "/app/data.json"
 
-Voulme:
+volume:
   name: "efsvolume"

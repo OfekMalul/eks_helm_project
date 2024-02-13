@@ -24,8 +24,8 @@ spec:
             - configMapRef:
                 name: {{ .Values.configmap.name }}
       imagePullSecrets:
-        - name: {{ .Values.imagePullSecrets[0] }}
+        - name: "web-app-key"
       volumes:
-        - name: {{ .Values.volumes.name }}
+        - name: {{ .Values.volume.name }}
           persistentVolumeClaim:
-            claimName: {{ .Values.persistent.name}}
+            claimName: {{ .Values.persistent.name }}
