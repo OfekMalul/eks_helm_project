@@ -61,7 +61,8 @@ docker buildx build -t weather_app:1.0.7 . --platform linux/amd64
 
     2.1 create values-update.yaml file and update the storageclass according to your need
 4. Add what is needed to the deployment so the pods can access the volume
-5. upgrade the chart and you should be gloden
+5. Add to one of the nodes permission - efscsi....
+6. upgrade the chart and you should be gloden
 
 ############  DELETE THE CLUSTER EKS  ############
 
